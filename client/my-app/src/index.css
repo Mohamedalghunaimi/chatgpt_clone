@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* داخل ملف CSS أو داخل style في JSX */
+/* داخل ملف CSS أو داخل style في JSX */
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+

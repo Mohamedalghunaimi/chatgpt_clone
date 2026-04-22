@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.reset-tw:not(pre):not(code) {
+    all:revert
+}
+.animi1 {
+    animation:  anim1 0.5s linear 0s infinite alternate ;
+}
+.animi2 {
+    animation:  anim1 0.5s linear 0.5s infinite alternate   ;
+}
+.animi3 {
+    animation:  anim1 0.5s linear 0s  infinite alternate  ;
+} 
+.parent:hover .child {
+    display: block;
+}
+@keyframes anim1 {
+    from {
+        transform: translateY(0);
+    }
+    to{
+        transform: translateY(-15px)    
+    }
+}
+input {
+    background-color: transparent;
+}
+select {
+    color: black;
+}
