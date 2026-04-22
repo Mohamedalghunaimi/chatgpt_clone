@@ -48,18 +48,18 @@ const Login = () => {
 
   }
   return (
-    <div className=' w-[100%] h-screen bg-slate-900 flex justify-center items-center'>
-      <div className=' capitalize p-[30px] flex flex-col gap-[10px] rounded-md w-[30%] min-w-[500px] bg-white'>
+    <div className=' h-screen w-full bg-gradient-to-b from-blue-50 to-blue-200 flex justify-center items-center'>
+      <div className=' capitalize border-2 border-blue-200 p-[30px] flex  shadow-lg flex-col gap-[10px] rounded-xl w-[30%] min-w-[500px] bg-white'>
         <h1 className=' text-center font-bold text-2xl'><span className=' text-blue-600'>user </span>{state}</h1>
         {state!=="login"&&<>
         <label htmlFor='name' className='font-semibold text-gray-600'>name</label>
-        <input value={name} onChange={(e)=>setName(e.target.value)} type='text' id='name' placeholder='enter your name' className=' p-[10px] border-[1px] border-gray-500 rounded-lg' />
+        <input  value={name} onChange={(e)=>setName(e.target.value)} type='text' id='name' placeholder='enter your name' className=' p-[10px] border-[1px] border-gray-300 rounded-lg' />
         </>
         }
         <label htmlFor='email'  className='font-semibold text-gray-600'>email</label>
-        <input  value={email} onChange={(e)=>setEmail(e.target.value)} id='email' type='email' placeholder='enter your email' className=' p-[10px] border-[1px] border-gray-500 rounded-lg' />
+        <input  value={email} onChange={(e)=>setEmail(e.target.value)} id='email' type='email' placeholder='enter your email' className=' p-[10px] border-[1px] border-gray-300 rounded-lg' />
         <label htmlFor='password'   className='font-semibold text-gray-600'>password</label>
-        <input   value={password} onChange={(e)=>setPassword(e.target.value)}  id='password' type='password' placeholder='enter your password'  className=' p-[10px] border-[1px] border-gray-500 rounded-lg'  />
+        <input   value={password} onChange={(e)=>setPassword(e.target.value)}  id='password' type='password' placeholder='enter your password'  className=' p-[10px] border-[1px] border-gray-300 rounded-lg'  />
         {state==="login"?<div className=' flex items-center gap-[5px]'>
         <p  className=' font-semibold text-gray-700 text-sm'>i don't hava an account? </p>
         <span className=' duration-300 hover:underline text-blue-700 text-sm cursor-pointer' onClick={()=> {

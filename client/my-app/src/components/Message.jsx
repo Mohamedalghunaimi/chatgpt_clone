@@ -12,6 +12,8 @@ const Message = ({message,setLoading,loading}) => {
         Prism.highlightAll()
     },[message.content])
 
+
+
   return (
     <div className={`${message.role==="user"?"flex flex-row-reverse":""}`}>
         {

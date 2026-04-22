@@ -17,6 +17,7 @@ const messageSchema = new mongoose.Schema({
         required:true
     }
 },{timestamps:true})
+
 const chatSchema = new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,

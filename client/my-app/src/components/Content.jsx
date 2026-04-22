@@ -12,12 +12,13 @@ const Content = () => {
     const [type,setType]= useState("text")
     const [input,setInput] = useState("")
     const [loading,setLoading] = useState(false)
+    const [response,setResponse] = useState('')
     const ref = useRef()
     useEffect(()=> {
         if(ref.current) {
             ref.current.scrollIntoView({ behavior: "smooth" });
         }
-    },[singleChat,setSingleChat,input])
+    },[singleChat,input,response])
     const submit = async()=> {
 
         if(!input) {
@@ -35,7 +36,7 @@ const Content = () => {
             isImage:false,
             role:"user"
         })
-        await setSingleChat(chatClone)
+        setSingleChat(chatClone)
         try {
             if(type==="text") {
                 const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/message/send-text`,{
@@ -44,12 +45,26 @@ const Content = () => {
                 prompt:input
             })
             if(data.success) {
-                
-                setLoading(false)
+                setResponse(data.reply)
                 chatClone.messages.push(data.reply)
                 setSingleChat(chatClone) 
+            } else {
+                toast.error(data.message)
             }
+            
             }else {
+                const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/message/send-image`,{
+                    userId:isAuth._id,
+                    chatId:singleChat._id,
+                    prompt:input
+                })
+            if(data.success) {
+                setResponse(data.reply)
+                chatClone.messages.push(data.reply)
+                setSingleChat(chatClone) 
+            } else {
+                toast.error(data.message)
+            }
             }
         } catch (error) {
             console.log(error)

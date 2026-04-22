@@ -80,6 +80,7 @@ const Sidbar = () => {
                 icon: "success"
             });
             setIsAuth(false)
+            setSingleChat(false)
             
             }
         }
@@ -166,14 +167,11 @@ Swal.fire({
             </ul>
             
         </div>
-        <div className=' flex items-center rounded-lg gap-[5px] border-[1px] p-[10px]  font-semibold'>
-            <span className=' text-2xl'><CiImageOn /></span>
-            community images
-        </div>
+
         <div onClick={()=>nav("/credits")} className=' cursor-pointer flex items-center rounded-lg gap-[5px] border-[1px] p-[10px]  font-semibold'>
             <span className=' text-2xl'><SiPaypal /></span>
             <div>
-                <h1>credit:17</h1>
+                <h1>credit:{isAuth.cradits}</h1>
                 <p className='text-sm text-gray-500'>Lorem, ipsum dolor sit amet </p>
             </div>
         </div>

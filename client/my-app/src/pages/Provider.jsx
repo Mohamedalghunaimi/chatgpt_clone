@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { createContext, use, useEffect, useState } from 'react'
+import React, { createContext,  useEffect, useState } from 'react'
 export const context = createContext()
 const Provider = ({children}) => {
     const [isAuth,setIsAuth] = useState(false)
@@ -34,6 +34,7 @@ const Provider = ({children}) => {
             console.log(error)
         }
     }
+    console.log(isAuth)
     useEffect(()=> {
         verify()
     },[isAuth])

@@ -30,11 +30,11 @@ const Credits = () => {
                 <h1 className=' text-3xl text-slate-800 font-bold text-center mb-[10px]'>
                     credits plan
                 </h1>
-                <div className=' flex justify-center gap-[20px] flex-wrap  '>
+                <div className=' grid grid-cols-1  md:grid-cols-2  lg:grid-cols-3 gap-[40px] flex-wrap mt-11  '>
                     {
                         dummyPlans.map((plan)=>(
-                            <div className=' shadow-md border p-[25px] flex flex-col gap-[10px]'>
-                                <h1 className='font-bold text-xl'>{plan.name}</h1>
+                            <div className=' shadow-md border py-[30px] px-[25px] flex flex-col gap-[10px] rounded-lg'>
+                                <h1 className='font-bold text-3xl text-slate-600'>{plan.name}</h1>
                                 <p><b className=' text-xl'>${plan.price}</b>/{plan.credits} credits</p>
                                 <ul className=' list-inside list-disc flex-1'>
                                     {

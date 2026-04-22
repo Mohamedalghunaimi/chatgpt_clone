@@ -4,8 +4,37 @@
 /* داخل ملف CSS أو داخل style في JSX */
 /* داخل ملف CSS أو داخل style في JSX */
 
-::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
+/* لكل المتصفحات */
+* {
+  --main-blue: #87CEEB;       /* لون أزرق فاتح */
+  --hover-blue: #08536c;      /* أزرق أغمق سنة عند الهوفر */
+  --track-bg: #f0f8ff;        /* خلفية مائلة للأزرق خفيف جداً */
+  
+  scrollbar-width: thin;
+  scrollbar-color: var(--main-blue) var(--track-bg);
+}
 
+/* Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--track-bg);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--main-blue);
+  border-radius: 10px;
+  border: 2px solid var(--track-bg); /* بيخلي المقبض شكله أنيق وبعيد عن الحواف */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-blue);
+}

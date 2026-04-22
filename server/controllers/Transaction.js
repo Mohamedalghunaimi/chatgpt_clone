@@ -38,7 +38,13 @@ const getPlans = async(req,res) => {
 }
 const purhasePlan = async(req,res)=> {
     const {userId,planId} = req.body
-    const {origin} = req.headers
+    const {origin} = req.headers;
+    if(!userId || !planId) {
+        return res.json({
+            success:false,
+            message:"missing details"
+        })
+    }
     try {
         await main()
         const plan = plans.find((plan)=>plan._id===planId)
@@ -48,13 +54,26 @@ const purhasePlan = async(req,res)=> {
                 messsage:"plan is not exists"
             })
         }
+        const existingUser = await User.findById(userId).select("email");
+        if(!existingUser) {
+            return res.json({
+                success:false,
+                message:"user not found"
+            })
+
+        }
+        if(existingUser.email !==req.email) {
+            return res.json({
+                success:false,
+                message:"forbiddden"
+            })
+        }
         const newTransaction = new Transaction({
             planId,
             userId,
             amount:plan.price,
             credits:plan.credits
         })
-        //const updatedUser = await User.findByIdAndUpdate(userId,{credits:plan.credits})
         const savedTransaction= await newTransaction.save();
         const session = await stripe.checkout.sessions.create({
             line_items:[
@@ -86,6 +105,20 @@ const successPay = async(req,res)=> {
     const {userId,transactionId} = req.body
     try {
         await main();
+        const existingUser = await User.findById(userId).select("email");
+        if(!existingUser) {
+            return res.json({
+                success:false,
+                message:"user not found"
+            })
+
+        }
+        if(existingUser.email !==req.email) {
+            return res.json({
+                success:false,
+                message:"forbiddden"
+            })
+        }
         const transaction = await Transaction.findOne({_id:transactionId,userId})
         if(!transaction) {
             return res.json({
