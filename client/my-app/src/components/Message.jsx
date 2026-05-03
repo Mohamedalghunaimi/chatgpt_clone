@@ -1,11 +1,12 @@
 import moment from 'moment';
 import React, { use, useContext, useEffect, useState } from 'react'
 import { FaL, FaUser } from "react-icons/fa6";
-import Markdown from "react-markdown"
 import "../assets/prism.css"
 import Prism from "prismjs"
 import Leading from './Leading';
 import { context } from '../pages/Provider';
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 const Message = ({message,setLoading,loading}) => {
     const {input} = useContext(context);
     useEffect(()=> {
@@ -27,9 +28,9 @@ const Message = ({message,setLoading,loading}) => {
                 <p className='p-[10px] bg-blue-800 text-white rounded-full '><FaUser/></p>
                 <div  className={` ${!input?"bg-gray-100 text-black":" bg-slate-600 text-white"} p-[10px] rounded-xl rounded-tr-none mt-[10px]`}>
                 <p>
-                    <Markdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {message.content}
-                    </Markdown>
+                    </ReactMarkdown>
                 </p>
                 <p className=' font-semibold'>{moment(message.createdAt).fromNow()}</p>
                 </div>
@@ -37,10 +38,9 @@ const Message = ({message,setLoading,loading}) => {
             </>:<>
             <div className={`p-[10px] ${!input?"bg-gray-100 text-black":" bg-slate-600 text-white"} rounded-xl w-[80%] my-[10px]`}>
                 <p className='reset-tw'>
-                    <Markdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {message.content}
-                    </Markdown> 
-                    
+                    </ReactMarkdown>
                 </p>
                 <p className=' font-semibold'>{moment(message.createdAt).fromNow()}</p>
             </div>

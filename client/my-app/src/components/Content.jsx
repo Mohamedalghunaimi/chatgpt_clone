@@ -13,21 +13,19 @@ const Content = () => {
     const [input,setInput] = useState("")
     const [loading,setLoading] = useState(false)
     const [response,setResponse] = useState('')
-    const ref = useRef()
+    const ref = useRef();
     useEffect(()=> {
         if(ref.current) {
             ref.current.scrollIntoView({ behavior: "smooth" });
         }
-
     },[singleChat,input,response])
-    const submit = async()=> {
 
+    const submit = async()=> {
         if(!input) {
             return toast.error("please enter content")
         }
         if(!singleChat) {
             return toast.error("chat not found")
-
         }
         setInput("")
         setLoading(true)
@@ -38,8 +36,6 @@ const Content = () => {
             role:"user"
         })
         setSingleChat(chatClone)
-
-        
         try {
             if(type==="text") {
                 const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/message/send-text`,{
@@ -54,8 +50,7 @@ const Content = () => {
             } else {
                 toast.error(data.message)
             }
-            
-            }else {
+            } else {
                 const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/message/send-image`,{
                     userId:isAuth._id,
                     chatId:singleChat._id,

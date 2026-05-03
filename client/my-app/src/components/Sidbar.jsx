@@ -55,7 +55,7 @@ const Sidbar = () => {
     },[])
     useEffect(()=> {
         if(originalChats.length>0) {
-             setChats(originalChats)
+            setChats(originalChats)
         }
     },[originalChats])
     useEffect(()=> {
@@ -153,7 +153,7 @@ Swal.fire({
                 {
                     chats.map((chat)=> {
                         return(<>
-                        <li className='p-[10px] parent  relative border-[1px] rounded-2xl cursor-pointer' onClick={()=> {
+                        <li  className={`p-[10px] parent cursor-pointer  ${singleChat && singleChat._id === chat._id?" bg-slate-200":""}  relative border-[1px] rounded-2xl cursor-pointer'`} onClick={()=> {
                             setSingleChat(chat)
                             nav("/")
                         }}>
