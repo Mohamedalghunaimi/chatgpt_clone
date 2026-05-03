@@ -115,18 +115,22 @@ const Content = () => {
 
         <div className=' flex justify-center py-[20px]'>
             <div className=' flex gap-[10px] w-[90%] lg:w-[50%] border-[2px] rounded-full overflow-hidden'>
-                <select onChange={(e)=> {
+                <select disabled={loading} onChange={(e)=> {
                     setType(e.target.value)
                 }} className='h-[100%] px-[10px] capitalize outline-none border-r-[1px]'>
                     <option value="text">text</option>
                     <option value="image">image</option>
                 </select>
-                <input type='text' onKeyDown={(e)=> {
+                <input disabled={loading} type='text' onKeyDown={(e)=> {
                     if(e.key==="Enter") {
                         submit()
                     }
                 }} value={input} onChange={(e)=>setInput(e.target.value)} placeholder='type your prompt' className='flex-1 p-[10px] outline-none'/>
-                <div onClick={()=> submit()} className='bg-blue-500 rounded-full text-xl px-[15px] flex items-center text-white cursor-pointer'>
+                <div onClick={() => {
+                    if(!loading){
+                        submit()
+                    }
+                }} className='bg-blue-500 rounded-full text-xl px-[15px] flex items-center text-white cursor-pointer'>
                     <IoSend/>
                 </div>
             </div>
