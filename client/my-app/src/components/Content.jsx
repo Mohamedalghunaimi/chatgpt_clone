@@ -8,7 +8,7 @@ import axios from 'axios';
 import Leading from './Leading';
 
 const Content = () => {
-    const {singleChat,isAuth,setSingleChat} = useContext(context);
+    const {singleChat,isAuth,setSingleChat,setOriginalChats} = useContext(context);
     const [type,setType]= useState("text")
     const [input,setInput] = useState("")
     const [loading,setLoading] = useState(false)
@@ -18,6 +18,7 @@ const Content = () => {
         if(ref.current) {
             ref.current.scrollIntoView({ behavior: "smooth" });
         }
+
     },[singleChat,input,response])
     const submit = async()=> {
 
@@ -37,6 +38,8 @@ const Content = () => {
             role:"user"
         })
         setSingleChat(chatClone)
+
+        
         try {
             if(type==="text") {
                 const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/message/send-text`,{
@@ -70,6 +73,10 @@ const Content = () => {
             console.log(error)
         } finally {
             setLoading(false)
+            setOriginalChats(prev=> {
+                const otherChats = prev.filter((chat)=> chat._id!==singleChat._id)
+                return [...otherChats,{...chatClone,name:chatClone.messages[0].content.slice(0,20)}]    
+            })
         }
 
     }

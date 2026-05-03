@@ -20,7 +20,12 @@ const generateImage = async (prompt) => {
 
   return response.data;
   } catch (error) {
-    throw new Error(error)
+    if(error.response?.status===402) {
+      throw new Error("you have been reached to the limit")
+
+
+    }
+    throw error
     
   }
 

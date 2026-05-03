@@ -14,7 +14,6 @@ const SuccessPage = () => {
                 userId:isAuth._id
             })
             console.log(data)    
-               
             if(data.success) {
                 nav("/") 
             }
@@ -23,10 +22,13 @@ const SuccessPage = () => {
         }
     }
     useEffect(()=> {
+        if(!isAuth) {
+            nav("/login")
+        }
         successOperation()
 
 
-    },[])
+    },[isAuth._id,searchParams.get('id')])
   return (
     <div>
       loading

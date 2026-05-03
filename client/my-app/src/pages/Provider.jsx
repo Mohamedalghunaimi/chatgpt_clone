@@ -34,10 +34,10 @@ const Provider = ({children}) => {
             console.log(error)
         }
     }
-    console.log(isAuth)
     useEffect(()=> {
+
         verify()
-    },[isAuth])
+    },[])
   return (
     <context.Provider value={value}>
         {children}

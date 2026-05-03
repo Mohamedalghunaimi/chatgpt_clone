@@ -18,20 +18,19 @@ const Sidbar = () => {
     const [chats,setChats] = useState(originalChats)
     const [search,setSearch] = useState("")
     const createChat = async()=> {
-        setChats([...chats,{
-            userId:isAuth._id,
-            userName:isAuth.name,
-            messages:[],
-            name:"New Chat",
-            createdAt:Date.now()
-        }])
+
         try {
             const {data} = await axios.post(process.env.REACT_APP_API_URL+"/chat/create",{
                 userId:isAuth._id,
                 userName:isAuth.name
             })
-            if(data.success)
-            setChats([...chats,data.chat])
+            if(data.success) 
+            {
+                setChats([...chats,data.chat])
+                setSingleChat(data.chat)
+
+            }
+            
         } catch (error) {
             console.log(error)
         }
@@ -55,9 +54,14 @@ const Sidbar = () => {
         getChats()
     },[])
     useEffect(()=> {
-        setChats(originalChats)
+        if(originalChats.length>0) {
+             setChats(originalChats)
+        }
     },[originalChats])
     useEffect(()=> {
+        if(search.trim().length===0) {
+            setChats(originalChats)
+        }
         filterBySearch()
     },[search])
     const logout = async()=> {
